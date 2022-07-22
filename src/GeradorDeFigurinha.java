@@ -1,17 +1,22 @@
-
-import java.awt.image.BufferedImage;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
 public class GeradorDeFigurinha {
 
-    public void cria() throws Exception {
+    public void cria(InputStream inputStream, String nomeArquivo) throws Exception {
         //le imagem
-        BufferedImage original = ImageIO.read(new File("entrada/filme.jpg"));
+
+        //InputStream inputStream = FileInputStream(new File("entrada/filme.jpg"));
+        //InputStream inputStream = new URL("https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@.jpg").openStream();
+        BufferedImage original = ImageIO.read(inputStream);
+
         //cria nova imagem em memória com transparência e com tamanho novo
+
         int largura = original.getWidth();
         int altura = original.getHeight();
         int novaAltura = altura + 200;
@@ -33,10 +38,6 @@ public class GeradorDeFigurinha {
 
         //escrever nova imagem num arquivo
 
-        ImageIO.write(novaImagem, "png", new File("saida/figurinha.png"));
-    }
-    public static void main(String[] args) throws Exception {
-        var gerador = new GeradorDeFigurinha();
-        gerador.cria();
+        ImageIO.write(novaImagem, "png", new File(nomeArquivo));
     }
 }
